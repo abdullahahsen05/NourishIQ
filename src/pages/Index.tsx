@@ -42,130 +42,20 @@ const Index = () => {
           {/* COLUMN 1 */}
           <div className="flex flex-col gap-5 lg:gap-6">
             <div className="grid grid-cols-2 gap-4">
-              <StatCard title="Weight" value="72.5" unit="kg" variant="primary" />
-              <StatCard title="Steps" value="82,641" />
+              <WeightCard />
+              <StepsCard />
             </div>
-
-            <div className="card-surface p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Daily Inputs</h3>
-                <button className="text-muted-foreground text-xl leading-none">···</button>
-              </div>
-              <div className="grid grid-cols-3 gap-3">
-                <button className="aspect-square rounded-2xl border-2 border-dashed border-border grid place-items-center text-2xl text-muted-foreground hover:border-primary hover:text-primary transition-colors">
-                  +
-                </button>
-                <div className="aspect-square rounded-2xl bg-surface-soft p-3 flex flex-col justify-between">
-                  <span className="text-xs text-muted-foreground">💧 Saturation</span>
-                  <div>
-                    <div className="text-lg font-bold">98%</div>
-                    <div className="text-[10px] text-muted-foreground">Mmol/L 14:00</div>
-                  </div>
-                </div>
-                <div className="aspect-square rounded-2xl bg-surface-soft p-3 flex flex-col justify-between">
-                  <span className="text-xs text-muted-foreground">💜 Pressure</span>
-                  <div>
-                    <div className="text-lg font-bold">140/70</div>
-                    <div className="text-[10px] text-primary">120/60 14:00</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 rounded-2xl bg-surface-soft p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">🔥 Calories</span>
-                  <span className="text-sm font-bold">1540<span className="text-xs text-muted-foreground">kcal</span></span>
-                </div>
-                <div className="flex gap-1">
-                  {Array.from({ length: 24 }).map((_, i) => (
-                    <span
-                      key={i}
-                      className={`flex-1 h-6 rounded-sm ${i < 16 ? "bg-primary" : "bg-border"}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="card-surface p-5">
-              <h3 className="font-semibold mb-3">Today's Plan Activity</h3>
-              <div className="flex items-center gap-3">
-                <div className="w-14 h-14 rounded-2xl bg-surface-soft grid place-items-center text-2xl">🏋️</div>
-                <div className="flex-1">
-                  <div className="font-semibold">Bench press</div>
-                  <div className="text-xs text-muted-foreground">⏱ 3:00 · 3 Sets · 8 Reps</div>
-                  <div className="text-xs text-primary mt-0.5">🔶 Barbells</div>
-                </div>
-                <button className="bg-primary text-primary-foreground rounded-full px-5 py-2.5 text-sm font-semibold">
-                  STOP
-                </button>
-              </div>
-            </div>
+            <DailyInputs />
+            <TodaysPlan />
           </div>
 
           {/* COLUMN 2 */}
           <div className="flex flex-col gap-5 lg:gap-6">
             <div className="grid grid-cols-2 gap-4">
-              <StatCard title="Sleep" value="5h 36m" />
-              <StatCard title="Water Intake" value="1.8" unit="L" />
+              <SleepCard />
+              <WaterCard />
             </div>
-
-            <div className="card-surface p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold">Nutrition</h3>
-                <button className="text-muted-foreground text-xl leading-none">···</button>
-              </div>
-              <div className="grid grid-cols-7 gap-2 mb-5">
-                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d, i) => {
-                  const date = 21 + i;
-                  const isActive = date === 23;
-                  return (
-                    <div key={d} className="flex flex-col items-center gap-1.5">
-                      <span className="text-[10px] text-muted-foreground">{d}</span>
-                      <span
-                        className={`w-8 h-8 grid place-items-center rounded-full text-sm font-semibold border-2 ${
-                          isActive ? "bg-primary text-primary-foreground border-primary" : "border-border text-foreground"
-                        }`}
-                      >
-                        {date}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex items-center justify-center my-4">
-                <div className="relative w-44 h-44">
-                  <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-                    <circle cx="50" cy="50" r="42" fill="none" stroke="hsl(var(--border))" strokeWidth="8" />
-                    <circle cx="50" cy="50" r="42" fill="none" stroke="hsl(var(--primary))" strokeWidth="8" strokeDasharray="180 264" strokeLinecap="round" />
-                  </svg>
-                  <div className="absolute inset-0 grid place-items-center">
-                    <div className="text-center">
-                      <div className="bg-secondary text-secondary-foreground text-xs px-3 py-1 rounded-full inline-block mb-1">Day 12</div>
-                      <div className="text-2xl font-bold">🍎 764</div>
-                      <div className="text-[10px] text-muted-foreground">1500 Kcal</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                {[
-                  { label: "Carbs", value: "80/174g", color: "bg-primary" },
-                  { label: "Proteins", value: "68/158g", color: "bg-accent" },
-                  { label: "Fats", value: "10/83g", color: "bg-secondary" },
-                ].map((m) => (
-                  <div key={m.label} className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <span className={`w-1.5 h-5 rounded-full ${m.color}`} />
-                      <span className="text-muted-foreground">{m.label}</span>
-                    </div>
-                    <span className="font-semibold">{m.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <NutritionCard />
           </div>
 
           {/* COLUMN 3 */}

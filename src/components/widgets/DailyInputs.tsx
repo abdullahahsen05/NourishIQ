@@ -1,4 +1,12 @@
-import { Plus, Droplet, Heart, Flame, ArrowUpRight, MoreHorizontal } from "lucide-react";
+import {
+  Droplet,
+  Heart,
+  Flame,
+  ArrowUpRight,
+  MoreHorizontal,
+  Pill,
+  UtensilsCrossed,
+} from "lucide-react";
 
 const SaturationRing = ({ value = 98 }: { value?: number }) => {
   const r = 18;
@@ -23,7 +31,6 @@ const SaturationRing = ({ value = 98 }: { value?: number }) => {
 };
 
 const CaloriesDots = () => {
-  // 14 columns x 8 rows of dots
   const cols = 28;
   const rows = 7;
   const filled = Math.round(cols * rows * 0.72);
@@ -48,6 +55,23 @@ const CaloriesDots = () => {
   );
 };
 
+const logEntries = [
+  {
+    icon: Pill,
+    title: "Whey Protein & Creatine Monohydrate",
+    tag: "Supplement",
+    tagClass: "bg-secondary/10 text-secondary",
+    kcal: 120,
+  },
+  {
+    icon: UtensilsCrossed,
+    title: "Savour Foods Pulao Kabab",
+    tag: "Heavy meal spike",
+    tagClass: "bg-primary/15 text-primary",
+    kcal: 850,
+  },
+];
+
 const DailyInputs = () => {
   return (
     <div className="card-surface p-5">
@@ -58,19 +82,17 @@ const DailyInputs = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
-        <button className="aspect-square rounded-2xl border-2 border-dashed border-border grid place-items-center text-muted-foreground hover:border-primary hover:text-primary hover:bg-primary/5 transition-all">
-          <Plus className="w-6 h-6" />
-        </button>
-
+      <div className="grid grid-cols-2 gap-3">
         <div className="aspect-square rounded-2xl bg-surface-soft p-3 flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <Droplet className="w-4 h-4 text-primary" fill="currentColor" />
-            <span className="text-[9px] text-muted-foreground">Mmol/L</span>
+            <span className="text-[9px] text-muted-foreground">Mmol/L · 14:00</span>
           </div>
           <SaturationRing value={98} />
           <div>
-            <div className="text-base font-bold leading-none">98<span className="text-xs">%</span></div>
+            <div className="text-base font-bold leading-none">
+              98<span className="text-xs">%</span>
+            </div>
             <div className="text-[9px] text-muted-foreground mt-0.5">Saturation</div>
           </div>
         </div>
@@ -82,11 +104,17 @@ const DailyInputs = () => {
           </div>
           <div className="flex items-end gap-0.5 h-8">
             {[3, 5, 2, 6, 4, 7, 5, 8, 6].map((v, i) => (
-              <span key={i} className="flex-1 rounded-sm bg-primary/70" style={{ height: `${v * 10}%` }} />
+              <span
+                key={i}
+                className="flex-1 rounded-sm bg-primary/70"
+                style={{ height: `${v * 10}%` }}
+              />
             ))}
           </div>
           <div>
-            <div className="text-base font-bold leading-none">140<span className="text-xs text-muted-foreground">/70</span></div>
+            <div className="text-base font-bold leading-none">
+              140<span className="text-xs text-muted-foreground">/70</span>
+            </div>
             <div className="text-[9px] text-muted-foreground mt-0.5">Pressure</div>
           </div>
         </div>
@@ -102,12 +130,42 @@ const DailyInputs = () => {
           </div>
           <div className="text-right">
             <div className="text-base font-bold leading-none">
-              1540 <span className="text-xs text-muted-foreground font-medium">Kcal</span>
+              1540{" "}
+              <span className="text-xs text-muted-foreground font-medium">Kcal</span>
             </div>
             <div className="text-[10px] text-muted-foreground mt-0.5">Today</div>
           </div>
         </div>
         <CaloriesDots />
+      </div>
+
+      {/* Recent log entries */}
+      <div className="mt-3 space-y-2">
+        {logEntries.map((e) => {
+          const Icon = e.icon;
+          return (
+            <div
+              key={e.title}
+              className="flex items-center gap-3 p-2.5 rounded-xl bg-surface-soft hover:bg-muted transition-colors"
+            >
+              <div className="w-9 h-9 rounded-lg bg-background grid place-items-center shrink-0 border border-border/60">
+                <Icon className="w-4 h-4 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-xs font-semibold truncate">{e.title}</div>
+                <span
+                  className={`inline-block mt-0.5 text-[9px] font-medium px-1.5 py-0.5 rounded-full ${e.tagClass}`}
+                >
+                  {e.tag}
+                </span>
+              </div>
+              <div className="text-right shrink-0">
+                <div className="text-sm font-bold leading-none">{e.kcal}</div>
+                <div className="text-[9px] text-muted-foreground mt-0.5">Kcal</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

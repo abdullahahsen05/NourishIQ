@@ -1,43 +1,12 @@
 import Header from "@/components/Header";
 import { Calendar } from "lucide-react";
-
-const StatCard = ({
-  title,
-  value,
-  unit,
-  variant = "default",
-  children,
-}: {
-  title: string;
-  value: string;
-  unit?: string;
-  variant?: "default" | "primary";
-  children?: React.ReactNode;
-}) => {
-  const isPrimary = variant === "primary";
-  return (
-    <div
-      className={`rounded-3xl p-5 border transition-all hover:-translate-y-0.5 ${
-        isPrimary
-          ? "bg-gradient-orange text-primary-foreground border-transparent shadow-soft"
-          : "bg-surface border-border/60 shadow-card"
-      }`}
-    >
-      <div className="flex items-start justify-between mb-6">
-        <span className={`text-sm font-medium ${isPrimary ? "text-primary-foreground/90" : "text-muted-foreground"}`}>
-          {title}
-        </span>
-      </div>
-      <div className="flex items-end justify-between">
-        <div className="text-3xl lg:text-4xl font-bold tracking-tight">
-          {value}
-          {unit && <span className="text-base font-medium ml-0.5 opacity-80">{unit}</span>}
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-};
+import WeightCard from "@/components/widgets/WeightCard";
+import StepsCard from "@/components/widgets/StepsCard";
+import DailyInputs from "@/components/widgets/DailyInputs";
+import TodaysPlan from "@/components/widgets/TodaysPlan";
+import SleepCard from "@/components/widgets/SleepCard";
+import WaterCard from "@/components/widgets/WaterCard";
+import NutritionCard from "@/components/widgets/NutritionCard";
 
 const Index = () => {
   return (

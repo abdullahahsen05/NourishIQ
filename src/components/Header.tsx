@@ -1,39 +1,45 @@
 import { Plus, Search, Leaf } from "lucide-react";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const navLinks = ["Home", "Healthy Menu", "Calendar", "Progress", "AI Chat"];
+const navLinks = [
+  { label: "Home", to: "/" },
+  { label: "Calendar", to: "/calendar" },
+  { label: "Progress", to: "/progress" },
+  { label: "AI Chat", to: "/ai-chat" },
+];
 
 const Header = () => {
-  const [active, setActive] = useState("Home");
+  const { pathname } = useLocation();
 
   return (
     <header className="w-full bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b border-border/40">
       <div className="container mx-auto flex flex-wrap items-center gap-3 lg:gap-5 py-4">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 shrink-0 mr-2">
+        <Link to="/" className="flex items-center gap-2 shrink-0 mr-2">
           <span className="grid place-items-center w-10 h-10 rounded-full bg-primary text-primary-foreground shadow-soft">
             <Leaf className="w-5 h-5" strokeWidth={2.5} />
           </span>
           <span className="font-bold text-lg tracking-tight hidden sm:inline">NutriSense</span>
-        </a>
+        </Link>
 
         {/* Nav links - pill */}
         <nav className="order-3 lg:order-none w-full lg:w-auto overflow-x-auto scrollbar-none">
           <ul className="flex items-center gap-1 bg-surface/70 border border-border/50 rounded-full p-1 w-max mx-auto">
             {navLinks.map((link) => {
-              const isActive = active === link;
+              const isActive =
+                link.to === "/" ? pathname === "/" : pathname.startsWith(link.to);
               return (
-                <li key={link}>
-                  <button
-                    onClick={() => setActive(link)}
-                    className={`px-4 lg:px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                <li key={link.label}>
+                  <Link
+                    to={link.to}
+                    className={`px-4 lg:px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 inline-block ${
                       isActive
                         ? "bg-primary text-primary-foreground shadow-soft"
                         : "text-foreground/70 hover:text-foreground hover:bg-background"
                     }`}
                   >
-                    {link}
-                  </button>
+                    {link.label}
+                  </Link>
                 </li>
               );
             })}

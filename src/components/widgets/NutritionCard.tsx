@@ -10,19 +10,84 @@ const days = [
   { d: "Sat", n: 27 },
 ];
 
+// Distinct macro colors per design reference
+const COLORS = {
+  carbs: "#FA865E",
+  proteins: "#60C6FF",
+  fats: "#E066FF",
+  badge: "#7A60FF",
+};
+
 const macros = [
-  { label: "Carbs", current: 80, total: 174, unit: "g", color: "bg-primary", track: "bg-primary/15" },
-  { label: "Proteins", current: 68, total: 158, unit: "g", color: "bg-accent", track: "bg-accent/15" },
-  { label: "Fats", current: 10, total: 83, unit: "g", color: "bg-secondary", track: "bg-secondary/15" },
+  {
+    key: "carbs",
+    label: "Carbs",
+    current: 80,
+    total: 174,
+    unit: "g",
+    color: COLORS.carbs,
+  },
+  {
+    key: "proteins",
+    label: "Proteins",
+    current: 68,
+    total: 158,
+    unit: "g",
+    color: COLORS.proteins,
+  },
+  {
+    key: "fats",
+    label: "Fats",
+    current: 10,
+    total: 83,
+    unit: "g",
+    color: COLORS.fats,
+  },
 ];
+
+// Dotted progress bar built from fixed-count segments
+const DottedBar = ({ percent, color }: { percent: number; color: string }) => {
+  const segments = 28;
+  const filled = Math.round((percent / 100) * segments);
+  return (
+    <div className="flex items-center gap-[3px] w-full">
+      {Array.from({ length: segments }).map((_, i) => {
+        const active = i < filled;
+        return (
+          <span
+            key={i}
+            className="flex-1 h-2 rounded-full transition-all"
+            style={{
+              backgroundColor: active ? color : `${color}26`, // ~15% opacity track
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 const NutritionCard = () => {
   const consumed = 764;
   const goal = 1500;
-  const pct = consumed / goal;
+
+  // Donut split proportionally to macros' current values
+  const total = macros.reduce((s, m) => s + m.current, 0);
   const r = 70;
   const c = 2 * Math.PI * r;
-  const offset = c - pct * c;
+  const consumedFraction = consumed / goal;
+  const arcLen = c * consumedFraction;
+  const remaining = c - arcLen;
+
+  // Segment lengths within the consumed arc
+  const segLens = macros.map((m) => (m.current / total) * arcLen);
+  let cursor = 0;
+  const segments = macros.map((m, i) => {
+    const dash = `${segLens[i]} ${c - segLens[i]}`;
+    const offset = -cursor;
+    cursor += segLens[i];
+    return { color: m.color, dash, offset };
+  });
 
   return (
     <div className="card-surface p-5">
@@ -61,25 +126,42 @@ const NutritionCard = () => {
       <div className="flex items-center justify-center my-4">
         <div className="relative w-48 h-48">
           <svg viewBox="0 0 160 160" className="w-full h-full -rotate-90">
-            <circle cx="80" cy="80" r={r} fill="none" stroke="hsl(var(--border))" strokeWidth="14" />
+            {/* Track */}
             <circle
               cx="80"
               cy="80"
               r={r}
               fill="none"
-              stroke="hsl(var(--primary))"
+              stroke="hsl(var(--border))"
               strokeWidth="14"
-              strokeDasharray={c}
-              strokeDashoffset={offset}
-              strokeLinecap="round"
             />
+            {/* Macro segments */}
+            {segments.map((s, i) => (
+              <circle
+                key={i}
+                cx="80"
+                cy="80"
+                r={r}
+                fill="none"
+                stroke={s.color}
+                strokeWidth="14"
+                strokeDasharray={s.dash}
+                strokeDashoffset={s.offset}
+                strokeLinecap="butt"
+              />
+            ))}
           </svg>
           <div className="absolute inset-0 grid place-items-center">
             <div className="text-center">
-              <div className="inline-flex items-center gap-1 bg-secondary text-secondary-foreground text-[10px] font-medium px-2.5 py-1 rounded-full mb-2">
+              <div
+                className="inline-flex items-center gap-1 text-white text-[10px] font-medium px-2.5 py-1 rounded-full mb-2"
+                style={{ backgroundColor: COLORS.badge }}
+              >
                 <Apple className="w-3 h-3" /> Day 12
               </div>
-              <div className="text-3xl font-bold leading-none tracking-tight">{consumed}</div>
+              <div className="text-3xl font-bold leading-none tracking-tight">
+                {consumed}
+              </div>
               <div className="text-[11px] text-muted-foreground mt-1">
                 / {goal} Kcal
               </div>
@@ -95,18 +177,26 @@ const NutritionCard = () => {
           return (
             <div key={m.label}>
               <div className="flex items-baseline justify-between mb-1.5">
-                <span className="text-sm font-medium text-muted-foreground">{m.label}</span>
+                <span
+                  className="text-sm font-medium"
+                  style={{ color: m.color }}
+                >
+                  {m.label}
+                </span>
                 <span className="text-sm">
-                  <span className="font-bold text-foreground">{m.current}</span>
-                  <span className="text-muted-foreground">/{m.total}{m.unit}</span>
+                  <span
+                    className="font-bold"
+                    style={{ color: m.color }}
+                  >
+                    {m.current}
+                  </span>
+                  <span className="text-muted-foreground">
+                    /{m.total}
+                    {m.unit}
+                  </span>
                 </span>
               </div>
-              <div className={`h-2 rounded-full ${m.track} overflow-hidden`}>
-                <div
-                  className={`h-full rounded-full ${m.color} transition-all`}
-                  style={{ width: `${p}%` }}
-                />
-              </div>
+              <DottedBar percent={p} color={m.color} />
             </div>
           );
         })}

@@ -9,7 +9,7 @@ const StepsCard = () => {
           <p className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1">
             <Footprints className="w-3 h-3" /> Steps
           </p>
-          <div className="text-3xl font-bold tracking-tight">82,641</div>
+          <div className="text-3xl font-bold tracking-tight">12,684</div>
         </div>
         <span className="text-[10px] bg-surface-soft px-2 py-1 rounded-full font-medium text-muted-foreground">
           Today
@@ -27,8 +27,8 @@ const StepsCard = () => {
       </div>
 
       <div className="flex items-center justify-between text-[11px]">
-        <span className="text-primary font-semibold">+12% vs yesterday</span>
-        <span className="text-muted-foreground">Goal: 100k</span>
+        <span className="text-primary font-semibold">+8% vs yesterday</span>
+        <span className="text-muted-foreground">Goal: 15,000</span>
       </div>
     </div>
   );

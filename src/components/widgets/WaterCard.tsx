@@ -49,9 +49,10 @@ const WaterCard = () => {
 
       <div className="flex items-end justify-between relative z-10">
         <div className="text-2xl font-bold tracking-tight">
-          1.8<span className="text-xl">L</span>
+          2.4<span className="text-xl">L</span>
+          <span className="text-xs text-muted-foreground font-medium ml-1">/ 3L</span>
         </div>
-        <span className="text-[10px] text-primary font-semibold">+0.3L</span>
+        <span className="text-[10px] text-primary font-semibold">+0.4L</span>
       </div>
     </div>
   );

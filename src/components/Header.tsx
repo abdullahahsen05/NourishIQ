@@ -1,5 +1,6 @@
 import { Plus, Search, Leaf } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import coachAvatar from "@/assets/coach-avatar.png";
 
 const navLinks = [
   { label: "Home", to: "/" },
@@ -68,9 +69,12 @@ const Header = () => {
 
           <div className="flex items-center gap-2 pl-1">
             <img
-              src="https://i.pravatar.cc/64?img=12"
+              src={coachAvatar}
               alt="Masud A."
-              className="w-10 h-10 rounded-full object-cover ring-2 ring-background"
+              width={64}
+              height={64}
+              loading="lazy"
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-background bg-primary/10"
             />
             <div className="hidden md:flex flex-col leading-tight">
               <span className="text-sm font-semibold">Masud A.</span>

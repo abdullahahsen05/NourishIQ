@@ -38,7 +38,7 @@ const SleepCard = () => {
 
       <div className="flex items-end justify-between">
         <div className="text-2xl font-bold tracking-tight">
-          5h <span className="text-xl">36m</span>
+          7h <span className="text-xl">02m</span>
         </div>
         <span className="text-[10px] text-primary font-semibold">Good</span>
       </div>

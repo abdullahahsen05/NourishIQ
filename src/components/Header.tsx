@@ -25,7 +25,7 @@ const Header = () => {
 
         {/* Nav links - pill */}
         <nav className="order-3 lg:order-none w-full lg:w-auto overflow-x-auto scrollbar-none">
-          <ul className="flex items-center gap-1 bg-surface/70 border border-border/50 rounded-full p-1 w-max mx-auto">
+          <ul className="flex items-center gap-0.5 sm:gap-1 bg-surface/70 border border-border/50 rounded-full p-1 w-max mx-auto">
             {navLinks.map((link) => {
               const isActive =
                 link.to === "/" ? pathname === "/" : pathname.startsWith(link.to);
@@ -33,7 +33,7 @@ const Header = () => {
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className={`px-4 lg:px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 inline-block ${
+                    className={`px-3 sm:px-4 lg:px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 inline-block min-h-[40px] flex items-center ${
                       isActive
                         ? "bg-primary text-primary-foreground shadow-soft"
                         : "text-foreground/70 hover:text-foreground hover:bg-background"

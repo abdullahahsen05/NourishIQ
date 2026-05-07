@@ -16,23 +16,23 @@ const Index = () => {
 
       <main className="container mx-auto py-6 lg:py-8">
         {/* Greeting row */}
-        <section className="flex flex-wrap items-end justify-between gap-4 mb-8 animate-fade-in">
+        <section className="flex flex-wrap items-end justify-between gap-3 mb-8 animate-fade-in">
           <div>
             <p className="text-sm text-muted-foreground mb-1">Let's Rock today,</p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
               Welcome Back, Masud A. <span className="inline-block">👋</span>
             </h1>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-3 bg-surface rounded-full px-4 py-2 border border-border/60">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3 bg-surface rounded-full px-3 sm:px-4 py-2 border border-border/60">
               <Calendar className="w-4 h-4 text-muted-foreground" />
-              <span className="text-2xl font-bold leading-none">19</span>
+              <span className="text-xl sm:text-2xl font-bold leading-none">19</span>
               <div className="leading-tight">
                 <div className="text-xs font-medium">Tue,</div>
                 <div className="text-xs text-muted-foreground">December</div>
               </div>
             </div>
-            <button className="bg-primary text-primary-foreground rounded-full px-5 py-3 text-sm font-semibold shadow-soft hover:shadow-pop hover:bg-primary-glow transition-all">
+            <button className="bg-primary text-primary-foreground rounded-full px-4 sm:px-5 py-2.5 sm:py-3 text-sm font-semibold shadow-soft hover:shadow-pop hover:bg-primary-glow transition-all whitespace-nowrap">
               Show my Task
             </button>
           </div>
@@ -42,7 +42,7 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {/* COLUMN 1 */}
           <div className="flex flex-col gap-5 lg:gap-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <WeightCard />
               <StepsCard />
             </div>
@@ -52,7 +52,7 @@ const Index = () => {
 
           {/* COLUMN 2 */}
           <div className="flex flex-col gap-5 lg:gap-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <SleepCard />
               <WaterCard />
             </div>

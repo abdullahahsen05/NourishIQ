@@ -184,7 +184,7 @@ const CalendarPage = () => {
         {/* Heading + stats row */}
         <section className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 items-stretch animate-fade-in">
           <div className="md:col-span-1 flex md:items-end">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Calendar</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Calendar</h1>
           </div>
           <div className="md:col-span-4 grid grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((s) => (
@@ -194,22 +194,22 @@ const CalendarPage = () => {
         </section>
 
         {/* Control bar */}
-        <section className="flex flex-wrap items-center gap-3 justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <h2 className="text-lg md:text-xl font-bold whitespace-nowrap">
+        <section className="flex flex-wrap items-center gap-3 mb-5">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+            <h2 className="text-base sm:text-lg md:text-xl font-bold whitespace-nowrap truncate">
               Monday, 06 October 2025
             </h2>
-            <button className="px-4 py-1.5 rounded-full bg-surface border border-border/60 text-sm font-medium hover:bg-muted transition">
+            <button className="px-3 sm:px-4 py-1.5 rounded-full bg-surface border border-border/60 text-sm font-medium hover:bg-muted transition shrink-0">
               Today
             </button>
           </div>
 
-          <div className="flex items-center gap-1 bg-surface border border-border/60 p-1 rounded-full">
+          <div className="flex items-center gap-0.5 sm:gap-1 bg-surface border border-border/60 p-1 rounded-full shrink-0">
             {(["Day", "Week", "Month"] as const).map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition ${
+                className={`px-3 sm:px-4 py-1.5 rounded-full text-sm font-medium transition ${
                   view === v
                     ? "bg-primary text-primary-foreground shadow-soft"
                     : "text-foreground/70 hover:text-foreground"
@@ -220,12 +220,12 @@ const CalendarPage = () => {
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 bg-surface border border-border/60 rounded-full px-4 py-2 text-sm">
-              <CalendarDays className="w-4 h-4 text-muted-foreground" />
-              <span className="font-medium">06 Oct - 10 Oct 2025</span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 bg-surface border border-border/60 rounded-full px-3 sm:px-4 py-2 text-sm">
+              <CalendarDays className="w-4 h-4 text-muted-foreground shrink-0" />
+              <span className="font-medium whitespace-nowrap">06 Oct - 10 Oct 2025</span>
             </div>
-            <button className="flex items-center gap-2 bg-surface border border-border/60 rounded-full px-4 py-2 text-sm font-semibold hover:bg-muted transition">
+            <button className="flex items-center gap-2 bg-surface border border-border/60 rounded-full px-3 sm:px-4 py-2 text-sm font-semibold hover:bg-muted transition">
               <SlidersHorizontal className="w-4 h-4" />
               Filter
             </button>

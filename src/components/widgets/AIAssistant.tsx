@@ -9,7 +9,7 @@ const actions = [
 
 const AIAssistant = () => {
   return (
-    <div className="card-surface p-5 lg:p-6 flex flex-col h-full min-h-[640px] relative overflow-hidden">
+    <div className="card-surface p-5 lg:p-6 flex flex-col h-full min-h-[420px] lg:min-h-[640px] relative overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

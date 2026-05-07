@@ -161,16 +161,16 @@ const ProgressPage = () => {
         <section className="flex flex-wrap items-end justify-between gap-4 mb-6 animate-fade-in">
           <div>
             <p className="text-sm text-muted-foreground mb-1">Track your journey,</p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
               Your Progress 📈
             </h1>
           </div>
-          <div className="flex items-center gap-2 bg-surface rounded-full p-1 border border-border/60">
+          <div className="flex items-center gap-0.5 sm:gap-1 bg-surface rounded-full p-1 border border-border/60">
             {["Weekly", "Monthly", "Yearly"].map((p) => (
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-3 sm:px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   period === p
                     ? "bg-primary text-primary-foreground shadow-soft"
                     : "text-muted-foreground hover:text-foreground"
@@ -236,7 +236,7 @@ const ProgressPage = () => {
               </button>
             </div>
 
-            <div className="h-[280px] -ml-2">
+            <div className="h-[200px] sm:h-[280px] -ml-2">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={calorieData} margin={{ top: 10, right: 16, left: 0, bottom: 0 }}>
                   <CartesianGrid stroke="hsl(var(--border))" strokeDasharray="3 6" vertical={false} />

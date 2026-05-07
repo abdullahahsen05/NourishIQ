@@ -40,7 +40,7 @@ const AIChat = () => {
       <main className="container mx-auto py-6 lg:py-10">
         <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
           {/* Orb */}
-          <div className="relative w-56 h-56 lg:w-64 lg:h-64 flex items-center justify-center animate-fade-in">
+          <div className="relative w-40 h-40 sm:w-56 sm:h-56 lg:w-64 lg:h-64 flex items-center justify-center animate-fade-in">
             <span className="absolute inset-0 rounded-full bg-primary/20 blur-3xl" />
             <span className="absolute inset-6 rounded-full bg-primary/15 animate-pulse-soft" />
             <img
@@ -53,7 +53,7 @@ const AIChat = () => {
           </div>
 
           {/* Heading */}
-          <h1 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h1 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
             Welcome to NutriAI Assistant
           </h1>
           <p className="mt-3 text-base md:text-lg text-muted-foreground">
